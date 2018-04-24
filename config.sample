@@ -1,0 +1,13 @@
+"config": {
+    "apiKeys": {
+        "openWeatherAPI": "YOUR-API-KEY-HERE",
+        "youtubeDataAPI": "YOUR-API-KEY-HERE"
+    },
+    "palette": {
+        "background": "#3D4341",
+        "font": "#CCD5C4",
+        "secondary": "#CEB99A",
+        "highlight": "#834038",
+        "visited": "#AB7D66",
+    }
+}

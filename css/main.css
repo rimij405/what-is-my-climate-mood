@@ -1,0 +1,42 @@
+/* CSS file for the Climate Mood application. */
+
+/* Reset CSS. */
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+/* Entire page settings. */
+html {
+    color: #CEB99A;
+    font-size: 24px;
+    font-family: 'Vollkorn', serif;
+    line-height: 1;
+}
+
+/* The website content wrapper. */
+body {
+    margin: 0px;
+    background: #3D4341;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #CCD5C4;
+    font-family: 'Bungee', cursive;
+    margin: 10px 0px 5px 0px;
+}
+
+main {
+    margin: 0px 25px;
+}
+
+main p {
+    margin: 15px 0px 0px 0px;
+}
+
+#content {
+    margin: 0px auto;
+    height: 180px;
+    width: 240px;
+    border: 1px solid #834038;
+}
