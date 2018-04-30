@@ -24,6 +24,9 @@ export let loader = (function() {
     };
         
     return {
+        toString: function(){
+            return `[module Loader]`;
+        },
         init,
         load
     }    
