@@ -3,12 +3,14 @@
     Wrapper for printing to the console.
 */
 
+"use strict";
+
 // Module controlling the printing of statements.
 export let printer = (function() {
     
     // Flags for the debug module.
     const flags = {
-        DEBUG_MODE: false,        
+        DEBUG_MODE: global.preferences.get("debug"),        
     };
     
     // Enum-like keys for message types.

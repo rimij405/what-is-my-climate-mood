@@ -1,6 +1,4 @@
 import {loader} from './modules/loader.js';
-import {request} from './modules/request.js';
-import {printer} from './modules/console.js';
 
 /*
     main.js
@@ -11,39 +9,23 @@ import {printer} from './modules/console.js';
 
 "use strict";
 
-printer.setDebug(true);
-
-// Print modules that have loaded for this class.
-printer.debug(printer.type.MESSAGE)(
-    `Loading modules:
-    ${loader}
-    ${request}
-    ${printer}`
-);
-
-window.onload = loader.load();
-
-printer.log("Got the request module.");
-
-let configuration = request.CreateConfiguration();
-configuration.url = "config.json";
-configuration.action = "GET";
-configuration.mimeType = "application/json";
-printer.log(`${configuration}`);
-
-let req = request.CreateRequest(configuration);
-req.setCallbacks({
-    load: function() {
-        req.response = req.object.responseText;
-        printer.log(req.response);
-    }
-});
-
-req.open();
-
-
-
-
-
-
-
+// Called once the window has been loaded into memory.
+window.onload = function(){
+        
+    // Set the global value for debug mode.
+    global.set("debug", true);
+    
+    // Initialize the loader.
+    loader.init();
+    
+    // Load the application resources.
+    loader.load();
+    
+    // Get the modules that the loader loaded in.
+    let request = global.get("request");
+    let printer = global.get("printer");
+    let dom = global.get("dom");
+    
+    
+};
+    
