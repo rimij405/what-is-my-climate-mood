@@ -2,6 +2,7 @@ import {util} from './util.js';
 import {printer} from './console.js';
 import {request} from './request.js';
 import {dom} from './dom.js';
+import {weather} from './weather.js';
 
 /*
     loader.js
@@ -20,7 +21,7 @@ export let loader = (function() {
     let init = function() {
         printer.setDebug(global.get("debug"));
         printer.debug(printer.type.WARN)("Running in debug mode.");
-        printer.log(util.loadingModules(util, printer, request, dom));
+        printer.log(util.loadingModules(util, printer, request, weather, dom));
         printer.debug()("Application modules loaded into memory.");
     };
     
@@ -29,43 +30,12 @@ export let loader = (function() {
         
         global.set("dom", dom);
         global.set("printer", printer);
-        global.set("request", request);  
+        global.set("request", request);
+        global.set("util", util);
+        global.set("weather", weather);
+                
         printer.debug()("Assigned loaded modules to global memory.");
                 
-        let configuration = request.RequestConfiguration({
-            url: "config.json",
-            action: "GET",
-            mimeType: "application/json",
-            type: "json",
-            cacheResults: true,
-            callbacks: {
-                error: function(err) {
-                    printer.error(`${err} - An error occured while requesting the resource '${this.url}'.`);                    
-                },
-                load: function() {
-                    
-                    // Save the request response.
-                    req.response = req.getXMLHttpRequest().response;
-                    printer.debug(printer.type.DIR)(req.response);
-                    
-                    // JSON values for the configuration JSON.
-                    let configJSON = req.response;
-                    
-                    // Save values to the local storage.
-                    printer.debug()(`API Keys:`);
-                    printer.debug(printer.type.DIR)(configJSON);
-                    
-                }
-            }
-        });
-        printer.debug(printer.type.DIR)(configuration);
-
-        let req = request.Request(configuration);
-        printer.debug(printer.type.DIR)(req);
-        
-        req.open();
-        
-        
     };
     
     // String to print when parsing this object.

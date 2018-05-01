@@ -315,9 +315,13 @@ export let dom = (function() {
         
         // Create a link.
         function CreateHyperlink(options, url, title){
-            options.set("href", url);
-            options.set("title", title);
             return CreateHTMLElement("a", options);
+        }
+        
+        // Create image.
+        function CreateImage(options, src, title){
+            let el = CreateHTMLElement("img", options);
+            return el;
         }
         
         return {
@@ -325,13 +329,14 @@ export let dom = (function() {
             toString: function(){
                 return `[namespace HTMLElement]`;
             },        
-            CreateOptions: HTMLElementOptions,
-            CreateHTMLElement,
-            CreateParagraph,
-            CreateDIV,
-            CreateButton,
-            CreateSection,
-            CreateHyperlink
+            HTMLElementOptions: HTMLElementOptions,
+            HTMLElement: CreateHTMLElement,
+            Paragraph: CreateParagraph,
+            Div: CreateDIV,
+            Button: CreateButton,
+            Section: CreateSection,
+            Hyperlink: CreateHyperlink,
+            Image: CreateImage
         }       
         
     })();
