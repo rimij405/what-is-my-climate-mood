@@ -69,8 +69,7 @@ let options = (function(){
 })();
 
 // Global class and values.
-let global = {
-    
+let global = {    
     // Retrieve a value associated with the key. If no modules apply, it will check preferences. If no preferences apply, it will return undefined.
     get: function(key){
         if(key){
@@ -164,5 +163,5 @@ let global = {
             return this.preferences.get(key);
         }
         return undefined;
-    }
+    }    
 };

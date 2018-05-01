@@ -31,26 +31,38 @@ export let loader = (function() {
         global.set("printer", printer);
         global.set("request", request);  
         printer.debug()("Assigned loaded modules to global memory.");
-        
-        
-        
-        
-
-        let configuration = request.RequestConfiguration();
-        configuration.url = "config.json";
-        configuration.action = "GET";
-        configuration.mimeType = "application/json";
-        configuration.cacheBuster = true;
-        printer.dir(configuration);
-
-        let req = request.Request(configuration);
-        req.setCallbacks({
-            load: function() {
-                req.response = JSON.parse(req.object.responseText);
-                printer.log(req.response);
+                
+        let configuration = request.RequestConfiguration({
+            url: "config.json",
+            action: "GET",
+            mimeType: "application/json",
+            type: "json",
+            cacheResults: true,
+            callbacks: {
+                error: function(err) {
+                    printer.error(`${err} - An error occured while requesting the resource '${this.url}'.`);                    
+                },
+                load: function() {
+                    
+                    // Save the request response.
+                    req.response = req.getXMLHttpRequest().response;
+                    printer.debug(printer.type.DIR)(req.response);
+                    
+                    // JSON values for the configuration JSON.
+                    let configJSON = req.response;
+                    
+                    // Save values to the local storage.
+                    printer.debug()(`API Keys:`);
+                    printer.debug(printer.type.DIR)(configJSON);
+                    
+                }
             }
         });
+        printer.debug(printer.type.DIR)(configuration);
 
+        let req = request.Request(configuration);
+        printer.debug(printer.type.DIR)(req);
+        
         req.open();
         
         
