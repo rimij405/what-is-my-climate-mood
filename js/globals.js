@@ -6,7 +6,7 @@
 "use strict";
 
 // Global options class.
-let options = (function(){
+const options = (function(){
 
     // Helper function that trims and lowercases a key, if possible.
     function getKey(value){
@@ -29,7 +29,7 @@ let options = (function(){
     Options.prototype.has = function(key){
         let validKey = getKey(key);
         if(validKey){
-            if(this.get(validKey)){
+            if(this[validKey]){
                 return true;
             }
         }
@@ -69,7 +69,24 @@ let options = (function(){
 })();
 
 // Global class and values.
-let global = {    
+const global = {   
+    
+    // Keys used for local storage.
+    keys: {
+        lastAPICall: {
+            openweathermap: "lasttime-owm",
+            youtube: "lasttime-ytd"
+        },
+        apikeys: {
+            openweathermap: "apikey-owm",
+            youtube: "apikey-ytd"
+        },        
+        cache: {
+            openweathermap: "cache-owm",
+            youtube: "cache-ytd"
+        }
+    },
+    
     // Retrieve a value associated with the key. If no modules apply, it will check preferences. If no preferences apply, it will return undefined.
     get: function(key){
         if(key){
@@ -91,6 +108,9 @@ let global = {
                || !value){
                 return undefined;
             }    
+            
+            // Also add it to the global properties.
+            this[key] = value;
             
             // if an object, it is assumed to be a module. Use a more specific setter to set objects as global preferences.
             if(typeof value === 'object'){
@@ -165,3 +185,18 @@ let global = {
         return undefined;
     }    
 };
+
+// Event names.
+const events = (function(){
+    
+    // Basic events that will be handled.
+    const register = {
+        oninit: 'init',
+        onload: 'load',
+        onerror: 'error',
+        onabort: 'abort',
+    }
+    
+    return register;
+    
+})();

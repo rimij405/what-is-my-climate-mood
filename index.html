@@ -36,18 +36,45 @@
             <h6 class="subtitle">Find your climate.</h6>
             <h6 class="subtitle">Match it to your mood.</h6>
             
-            
-            <div id="content">
+            <!-- This is the main section. -->
+            <div class="panel" id="content">
                 Content goes here in this box.
             </div>
             
-            <p>Your current temperature for [Location] is [value] [unit].</p>            
-            <!-- This is the main section. -->
+            <p class="hidden" id="currentInfo">Your current temperature for [Location] is [value] [unit].</p>            
+            
+            <div class="panel" id="controls">
+                
+                <h3>Enter YOUR DETAILS</h3>
+                
+                <form enctype="multipart/form-data" method="post" name="location">
+                    
+                    <div>
+                        <label for="zipcode"><h6 class="label">Zipcode:</h6></label>
+                        <input name="zipcode" type="text" placeholder="14623" required size="2" maxlength="12" />
+                    </div>
+                    
+                    <div>
+                        <label for="countryCode"><h6 class="label">Country:</h6></label>
+                        <input name="countryCode" placeholder="US" size="2" maxlength="4" required />                    
+                    </div>
+                    
+                    <div>
+                        <label for="format"><h6 class="label">Format:</h6><br/></label>
+                        <input name="format" type="radio" value="standard" checked> <h6 class="label">Standard</h6>
+                        <input name="format" type="radio" value="imperial"> <h6 class="label">Imperial</h6>
+                        <input name="format" type="radio" value="metric"> <h6 class="label">Metric</h6>
+                    </div>
+                    
+                    <input class="button" type="submit" value="Get Your MOOD Groove On!"/>
+                </form>
+            </div>
             
         </main>
         
         <footer>
             <!-- This is the footer.  -->
+            Copyright 2018 - Ian Effendi
         </footer>
         
     </body>

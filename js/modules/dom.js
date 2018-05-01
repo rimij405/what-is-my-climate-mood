@@ -12,7 +12,7 @@ export let dom = (function() {
     
     // Get the printer module.
     let printer = global.get("printer");
-    
+        
     // Collection of methods that must be bound upon a particular HTMLElement.
     const services = {
         
